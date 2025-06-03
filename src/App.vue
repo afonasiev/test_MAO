@@ -30,7 +30,6 @@ onBeforeMount(async () => {
       </div>
     </container>
   </main>
-  <footerUI />
 </template>
 
 <style module>
