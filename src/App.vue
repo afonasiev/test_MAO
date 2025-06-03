@@ -1,47 +1,50 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { onBeforeMount } from 'vue';
+import { useItemsStore } from '@/stores/items';
+import Shoes from './components/shoes/index.vue';
+import Header from './components/header/index.vue';
+import Jackets from './components/jackets/index.vue';
+import ItemsSelected from './components/itemsSelected/index.vue';
+import ItemSelected from './components/itemSelected/index.vue';
+
+const useItems = useItemsStore();
+const { getShoes, getJackets } = useItems;
+
+onBeforeMount(async () => {
+  await getShoes();
+  await getJackets();
+});
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
+  <Header />
   <main>
-    <TheWelcome />
+    <container>
+      <div :class="$style.top">
+        <items-selected />
+        <item-selected />
+      </div>
+      <div :class="$style.bottom">
+        <shoes />
+        <jackets />
+      </div>
+    </container>
   </main>
+  <footerUI />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style module>
+.top {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  min-height: 132px;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.bottom {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 </style>
