@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <header :class="$style.footer"><slot /></header>
+  <footer :class="$style.footer"><slot /></footer>
 </template>
 
 <style module>
