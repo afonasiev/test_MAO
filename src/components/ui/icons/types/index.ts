@@ -1,4 +1,4 @@
-type icons = 'dark' | 'light';
+type icons = 'dark' | 'light' | 'logo';
 interface Props {
   icon: icons;
 }

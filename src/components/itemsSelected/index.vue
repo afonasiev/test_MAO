@@ -14,11 +14,9 @@ const { shoesSelected } = storeToRefs(useItems);
       <Item
         v-for="(item, index) in shoesSelected"
         :key="index"
-        :data="item"
+        :item="item"
         @click.stop="toggleShoes(item)"
       />
     </template>
   </sectionUI>
 </template>
-
-<style module></style>

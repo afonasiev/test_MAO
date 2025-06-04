@@ -5,6 +5,9 @@ import changeThemes from '@/components/changeThemes/index.vue';
 <template>
   <headerUI>
     <container :class="$style.body">
+      <a :class="$style.logo">
+        <icons icon="logo" />
+      </a>
       <change-themes />
     </container>
   </headerUI>
@@ -14,7 +17,10 @@ import changeThemes from '@/components/changeThemes/index.vue';
 .body {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 16px 0;
+}
+.logo {
+  width: 25px;
 }
 </style>
