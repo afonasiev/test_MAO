@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import type { itemShoes } from '@/stores/items/types';
+import { computed, useCssModule } from 'vue';
+import type { Props } from '@/components/item/types';
 
-defineProps<{
-  data: itemShoes;
-}>();
+const { item, bottom = false, disabled = false } = defineProps<Props>();
+const $style = useCssModule();
+
+const classSelected = computed(() => (item.selected && bottom ? $style.selected : ''));
+const classDisabled = computed(() => (bottom && disabled && !item.selected ? $style.disabled : ''));
 </script>
 
 <template>
-  <div :class="$style.body">
-    <span :class="$style.id">{{ data.id }}</span>
-    <h4 :class="$style.heading">{{ data.name }}</h4>
+  <div :class="[$style.body, classSelected, classDisabled]">
+    <span :class="$style.id">{{ item.id }}</span>
+    <h4 :class="$style.heading">{{ item.name }}</h4>
   </div>
 </template>
 
@@ -41,5 +44,11 @@ defineProps<{
 }
 .heading {
   line-height: 1;
+}
+.selected {
+  opacity: 0.2;
+}
+.disabled {
+  cursor: not-allowed;
 }
 </style>
