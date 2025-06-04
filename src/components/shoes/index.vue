@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia';
 
 const useItems = useItemsStore();
 const { toggleShoes } = useItems;
-const { shoes } = storeToRefs(useItems);
+const { shoes, disabledShoes } = storeToRefs(useItems);
 </script>
 
 <template>
@@ -14,16 +14,11 @@ const { shoes } = storeToRefs(useItems);
       <Item
         v-for="(item, index) in shoes"
         :key="index"
-        :data="item"
-        :class="[item.selected ? $style.selected : '']"
+        :item="item"
+        bottom
+        :disabled="disabledShoes"
         @click.stop="toggleShoes(item)"
       />
     </template>
   </sectionUI>
 </template>
-
-<style module>
-.selected {
-  opacity: 0.2;
-}
-</style>

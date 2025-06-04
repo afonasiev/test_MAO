@@ -3,7 +3,6 @@ import type { Props } from '@/components/ui/icons/types';
 import { computed, defineAsyncComponent } from 'vue';
 
 const { icon } = defineProps<Props>();
-const model = defineModel<Props>();
 
 const dynamicComponent = computed(() => {
   console.log(icon);

@@ -14,16 +14,10 @@ const { jackets } = storeToRefs(useItems);
       <Item
         v-for="(item, index) in jackets"
         :key="index"
-        :data="item"
-        :class="[item.selected ? $style.selected : '']"
+        :item="item"
+        bottom
         @click.stop="toggleJacket(item)"
       />
     </template>
   </sectionUI>
 </template>
-
-<style module>
-.selected {
-  opacity: 0.2;
-}
-</style>

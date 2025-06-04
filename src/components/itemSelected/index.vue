@@ -11,9 +11,11 @@ const { jacketSelected } = storeToRefs(useItems);
 <template>
   <sectionUI>
     <template v-if="jacketSelected">
-      <Item :data="jacketSelected" @click.stop="toggleJacket(jacketSelected)" />
+      <Item
+        :key="jacketSelected.id"
+        :item="jacketSelected"
+        @click.stop="toggleJacket(jacketSelected)"
+      />
     </template>
   </sectionUI>
 </template>
-
-<style module></style>

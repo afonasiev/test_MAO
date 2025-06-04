@@ -21,14 +21,10 @@ export const useItemsStore = defineStore('useItems', {
       if (this.shoesSelected.some((shoe) => shoe.id === item.id)) {
         this.shoesSelected = this.shoesSelected.filter((shoe) => shoe.id !== item.id);
       } else {
+        if (this.disabledShoes) return;
         this.shoesSelected.push(item);
       }
-      this.shoes?.map((shoe) => {
-        shoe.selected = false;
-        this.shoesSelected.map((selected) => {
-          if (shoe.id === selected.id) shoe.selected = true;
-        });
-      });
+      this.selectedShoes();
     },
     toggleJacket(item: itemJacket) {
       if (this.jacketSelected !== null && this.jacketSelected.id === item.id) {
@@ -36,6 +32,9 @@ export const useItemsStore = defineStore('useItems', {
       } else {
         this.jacketSelected = item;
       }
+      this.selectedJackets(item);
+    },
+    selectedJackets(item: itemJacket) {
       this.jackets?.map((jacket) => {
         if (this.jacketSelected === null) {
           jacket.selected = false;
@@ -44,5 +43,16 @@ export const useItemsStore = defineStore('useItems', {
         }
       });
     },
+    selectedShoes() {
+      this.shoes?.map((shoe) => {
+        shoe.selected = false;
+        this.shoesSelected.map((selected) => {
+          if (shoe.id === selected.id) shoe.selected = true;
+        });
+      });
+    },
+  },
+  getters: {
+    disabledShoes: (state) => state.shoesSelected.length >= 6,
   },
 });
